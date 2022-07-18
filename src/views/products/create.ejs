@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+    <%- include("../partials/head") %>
+    <title>Creación de productos</title>
+    <link rel="stylesheet" href="/css/genres.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.7.0/validator.min.js" integrity="sha512-rJU+PnS2bHzDCvRGFhXouCSxf4YYaUyUfjXMHsHFfMKhWDIEBr8go2LZ2EYXOqASey1tWc2qToeOCYh9et2aGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script defer src="/js/validations/products/create-edit.js"></script>
+  </head>
+
+  <body>
+    <%- include("../partials/header") %>
+    
+    <div class="body-wrapper">
+      <main>
+        <form class="form-register" action="/products/create" method="post">
+          <h3 class="título form product-create">Crea un producto</h3>
+      
+          <!-- Nombre del producto -->
+          <label for="name" class="required">
+            Nombre del libro
+          </label>
+          <input class="controls login-box__input" type="text" name="name" id="name"
+          value="<%= locals.body?.name %>" placeholder="Ingrese el nombre del libro" autofocus>
+          <p class="feedback">
+            <%= locals.errors?.name?.msg %>
+          </p>
+
+          <!-- Nombre del autor -->
+          <label for="author" class="required">
+            Nombre del autor
+          </label>
+          <input class="controls login-box__input" type="text" name="author" id="author"
+          value="<%= locals.body?.author %>" placeholder="Ingrese el nombre del autor">
+          <p class="feedback">
+            <%= locals.errors?.author?.msg %>
+          </p>
+      
+          <!-- ISBN -->
+          <label for="isbn" class="required">
+            ISBN
+          </label>
+          <input class="controls login-box__input" type="text" name="isbn" id="isbn"
+          value="<%= locals.body?.isbn %>" placeholder="Ingrese el ISBN">
+          <p class="feedback">
+            <%= locals.errors?.isbn?.msg %>
+          </p>
+
+          <!-- Editorial -->
+          <label for="house" class="required">
+            Editorial
+          </label>
+          <input class="controls login-box__input" type="text" name="house" id="house"
+          value="<%= locals.body?.house %>" placeholder="Ingrese el nombre de la editorial">
+          <p class="feedback">
+            <%= locals.errors?.house?.msg %>
+          </p>
+
+          <!-- Géneros -->
+          <label for="genres-picker">
+            Géneros
+          </label>
+          
+          <div class="genres-wrapper">
+            <span id="genres-picker">
+              Selecciona los géneros
+            </span>
+
+            <ul class="genres-list">
+              <% locals.genres.forEach(genre => { %>
+                <li>
+                  <input type="checkbox" name="genres"  id="genre_<%= genre.id %>" value="<%= genre.id %>"
+                  <% if (locals.body?.genres?.includes(genre.id.toString())) { %> checked <% } %> >
+                  <label for="genre_<%= genre.id %>"><%= genre.name %></label>
+                </li>
+              <% }) %>
+            </ul>
+          </div>
+      
+          <!-- Precio -->
+          <label for="price" class="required">
+            Precio
+          </label>
+          <input class="controls login-box__input" type="number" name="price" id="price"
+          value="<%= locals.body?.price %>" placeholder="Ingresa el precio del libro" min="0" step="100">
+          <p class="feedback">
+            <%= locals.errors?.price?.msg %>
+          </p>
+      
+          <!-- Descripción -->
+          <label for="description">
+            Descripción
+          </label>
+          <textarea class="controls login-box__input" name="description" id="description"
+          placeholder="Ingrese una descripción"><%= locals.body?.description %></textarea>
+          <p class="feedback">
+            <%= locals.errors?.description?.msg %>
+          </p>
+      
+          <input class="botons" type="submit" value="Registrar">
+      
+          <a href="/products">Quiero modificar un producto ya creado</a>
+        </form>
+      </main>
+      <%- include("../partials/footer") %>
+    </div>
+  </body>
+
+</html>

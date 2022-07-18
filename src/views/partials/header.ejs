@@ -1,0 +1,95 @@
+<header>
+  <div class="top">
+    <div class="top-left">
+      <div class="burger-menu" id="burger-menu">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <a href="/" class="logo">
+        <img src="/img/logo.png" alt="">
+
+        <div class="logo-text">
+          <p>L&nbspSTANDS</p>
+          <p>FOR&nbspLIBROS</p>
+        </div>
+      </a>
+    </div>
+
+    <%- include("search-form", {deviceClass: "laptop"}) %>
+
+    <div class="top-right">
+      <div class="color-switch">
+
+      </div>
+
+      <% if (locals.session?.user) { %>
+        <h3 class="hola laptop">Hola <%= session.user.first_name %></h3>
+
+        <a href="/users/profile" class="pfp">
+          <img src=<%= "/img/users/" + session.user.img_path %> alt="">
+        </a>
+
+        <form action="/users?_method=DELETE" method="post" class="logout" id="logout-form">
+          <div class="logout-icon">
+            <i class="fas fa-sign-out-alt"></i>
+          </div>
+        </form>
+      <% } else { %>
+        <a href="/users/login" class="top-button btn">Ingresa</a>
+
+        <a href="/users/register" class="top-button btn">Regístrate</a>
+      <% } %>
+
+      <ul class="menu-list">
+        <li><a href="#">Categorias</a></li>
+        <li><a href="#">Ofertas</a></li>
+        <li><a href="#">Historial</a></li>
+
+        <% if (locals.session?.user?.category === "vendor") { %>
+          <li><a href="/products/create">Crear</a></li>
+          <li><a href="/products">Productos</a></li>
+        <% } %>
+        
+        <br>
+
+        <% if (locals.session?.user) { %>
+          <li id="logout-item">Cerrar sesión</li>
+        <% } else { %>
+          <li><a href="/users/login">Ingresa</a></li>
+          <li><a href="/users/register">Registrate</a></li>
+        <% } %>
+      </ul>
+
+      <% if (locals.session?.user) { %>
+        <div class="logout-screen">
+          <div class="logout-screen--form">
+            <h3>¿Seguro que deseas cerrar sesión?</h3>
+            <div class="logout-screen--options">
+              <button class="logout-screen--no">No</button>
+              <button class="logout-screen--yes">Sí</button>
+            </div>
+          </div>
+        </div>
+      <% } %>
+      </div>
+  </div>
+
+  <%- include("search-form", {deviceClass: "mobile"}) %>
+
+  <nav>
+    <ul class="navbar">
+      <li><a href="#">Categorias</a></li>
+      &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+      <li><a href="#">Ofertas</a></li>
+      &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+      <li><a href="#">Historial</a></li>
+      <% if (locals.session?.user?.category === "vendor") { %>
+        &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+        <li><a href="/products/create">Crear</a></li>
+        &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+        <li><a href="/products">Productos</a></li>
+      <% } %>
+    </ul>
+  </nav>
+
+</header>

@@ -1,0 +1,23 @@
+.btn {
+  --btn-fill: var(--main-color3, red);
+  --btn-text: var(--text-color, white);
+
+  padding: 1em 1.5em;
+  border: 1px solid var(--btn-fill);
+  border-radius: 9999px;
+  background-color: var(--btn-fill);
+  color: var(--btn-text);
+
+  transition: 0.1s;
+}
+
+.btn:hover {
+  --btn-fill: var(--text-color);
+  --btn-text: var(--main-color3);
+
+  cursor: pointer;
+}
+
+.btn:active {
+  transform: scale(0.8);
+}

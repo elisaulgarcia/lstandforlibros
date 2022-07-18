@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+    <%- include("./partials/head") %>
+    <title>Resultados de busqueda</title>
+  </head>
+
+  <body>
+    <%- include("./partials/header") %>
+    
+    <%- include("./partials/whatsapp") %>
+
+    <div class="body-wrapper">
+      <main>
+        <div class="initial initial__search">
+          <h1>Resultados de busqueda:</h1>
+        </div>
+        <section class="contenedor1">
+          <% libros.forEach(libro => { %>
+          <a href=<%= "/products/" + libro.id %> class="product">
+            <div class="image-container">
+              <img class="product-image" src=<%= "/img/products/" + libro.img_path %>>
+            </div>
+            <div class="descrip">
+              <div class="precio">
+                $ <%= toThousand(libro.price) %>
+              </div>
+              <div class="title">
+                <%= libro.name %>
+              </div>
+              <div class="author">
+                <%= libro.author %>
+              </div>
+            </div>
+          </a>
+          <% }) %>
+        </section>
+      </main>
+      
+      <%- include("./partials/footer") %>
+    </div>
+  </body>
+
+</html>
